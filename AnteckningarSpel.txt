@@ -1,0 +1,36 @@
+Need to have. 
+En orm som rör sig framåt automatiskt och som byter riktning med hjälp av piltangenterna. 
+När den äter ett äpple så växer den med ett tecken.
+Kolliderar den med sig själv eller med väggen är spelet slut. Då dyker Game Over upp.
+
+Nice to have. 
+Startruta. Scoreboard, med anv namn och score. Efter spelet slut visas high score.
+Powerups - ghost mode går genom väggarna, eller något som gör att den går saktare.
+Ormen går snabbare och snabbare eller i början kan du välja lätt, medel eller svår.
+Tidsbegränsning på äpplena. De byter plats eller några sekunder. 
+
+1. Rita ut ormen på skärmen. Startlängd: 5 tecken. 
+2. Få den att röra sig framåt.
+3. Få den att byta håll med piltangenterna.
+4. Få ut ett random äpple. 
+5. Ormen växer med ett tecken när det äter äpplet.
+6. Ett nytt äpple dyker upp.
+7. Villkor för när ormen dör när den krockar med sig själv sätts upp.
+8. Game over ruta.
+9. Rita ut spelyta.
+10.Villkor för när ormen dör när den krockar med ramen sätts upp.
+
+Klasser
+ORM 
+- En ArrayList av points som håller koordinaterna för varje punkt.
+- Move-metod framåt.Hur den rör sig. Att ett tecken läggs till "längst fram" och att ett tecken plockas bort "längst bak".
+- Move-metod byta riktning.
+
+ÄPPLE
+- Slumpas ut på ytan, ej där ormen är. 
+- När ormens huvud når äpplet, försvinner det och ett nytt slumpas ut.
+
+SPELPLAN
+- x= 75 och y= 25. 
+- Utritade "väggar".
+

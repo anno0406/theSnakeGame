@@ -1,4 +1,4 @@
-Need to have. 
+﻿Need to have. 
 En orm som rör sig framåt automatiskt och som byter riktning med hjälp av piltangenterna. 
 När den äter ett äpple så växer den med ett tecken.
 Kolliderar den med sig själv eller med väggen är spelet slut. Då dyker Game Over upp.
@@ -8,6 +8,13 @@ Startruta. Scoreboard, med anv namn och score. Efter spelet slut visas high scor
 Powerups - ghost mode går genom väggarna, eller något som gör att den går saktare.
 Ormen går snabbare och snabbare eller i början kan du välja lätt, medel eller svår.
 Tidsbegränsning på äpplena. De byter plats eller några sekunder. 
+
+
+
+DEBUGGING ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
+1- flytta rutan till mitten
+2- ska inte kunna byta håll
+3- 
 
 1. Rita ut ormen på skärmen. Startlängd: 5 tecken. 
 2. Få den att röra sig framåt.

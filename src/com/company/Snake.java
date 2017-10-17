@@ -40,10 +40,12 @@ public class Snake implements Draw {
         return false;
     }
 
-    public void move(Key key, Pear pear){
+    public void move(Key key, Pear pear, Terminal terminal){
         int posXForLastElem = points.get(points.size()-1).x;
         int posYForLastElem = points.get(points.size()-1).y;
         if (!pearSpot(pear)){
+            terminal.moveCursor(points.get(0).x, points.get(0).y);
+            terminal.putCharacter(' ');
             points.remove(0);
         }
         else {

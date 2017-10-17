@@ -22,6 +22,9 @@ public class Main {
         Pear pear = new Pear(snake);
         Key key;
 
+        backGroundOneColor(terminal);
+        snake.draw(terminal);
+        backGround(terminal);
 
         do {
             Thread.sleep(1);
@@ -29,11 +32,10 @@ public class Main {
         } while (key == null);
         while (snake.isAlive()) {
             key = terminal.readInput();
-            terminal.clearScreen();
-            //backGround(terminal);
+//            terminal.clearScreen();
+            snake.move(key, pear, terminal);
             snake.draw(terminal);
             pear.draw(terminal);
-            snake.move(key, pear);
             Thread.sleep(100);
         }
         gameOver(terminal);
@@ -54,11 +56,16 @@ public class Main {
             cornerPoints.add(new Point(0, j));
             cornerPoints.add(new Point(WIDTH, j));
         }
+    }
 
-        for (Point elem :cornerPoints ) {
-            terminal.moveCursor(elem.x, elem.y);
-            terminal.putCharacter('*');
+    public static void backGroundOneColor (Terminal terminal) {
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                terminal.moveCursor(i, j);
+            terminal.putCharacter(' ');
+            terminal.applyBackgroundColor(150, 110, 40);
             terminal.setCursorVisible(false);
+            }
         }
     }
 }

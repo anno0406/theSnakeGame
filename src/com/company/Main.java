@@ -20,7 +20,7 @@ public class Main {
     public static void main(String[] args) throws InterruptedException, IOException {
         Terminal terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF16"));
         terminal.enterPrivateMode();
-
+        MusicPlayer musicPlayer = new MusicPlayer();
         Snake snake = new Snake();
         Pear pear = new Pear(snake);
         SuperPear superPear = new SuperPear(snake, pear);
@@ -28,7 +28,6 @@ public class Main {
 
         backGroundOneColor(terminal);
         startPage(terminal);
-
         gameArea(terminal);
 
         do {
@@ -37,6 +36,7 @@ public class Main {
         } while (key == null);
         terminal.clearScreen();
         backGroundOneColor(terminal);
+        musicPlayer.play("/Users/aramiB/Downloads/Snake Game (online-audio-converter.com).mp3", true);
         while (snake.isAlive()) {
             key = terminal.readInput();
             snake.move(key, pear, terminal, superPear);
@@ -47,6 +47,7 @@ public class Main {
             Thread.sleep(speed);
         }
         gameOver(terminal, snake.scoreCounter);
+        musicPlayer.stop("/Users/aramiB/Downloads/Snake Game (online-audio-converter.com).mp3");
     }
 
     public static void startPage(Terminal terminal) throws FileNotFoundException {

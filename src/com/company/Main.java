@@ -12,6 +12,8 @@ import java.util.Scanner;
 
 public class Main {
 
+    public static final int XSTART = 5;
+    public static final int YSTART = 2;
     public static final int WIDTH = 75;
     public static final int HEIGHT = 25;
     static List<Point> cornerPoints = new ArrayList<>();
@@ -51,20 +53,20 @@ public class Main {
     }
 
     public static void backGround(Terminal terminal){
-        for (int i = 0; i < WIDTH; i++) {
-            cornerPoints.add(new Point(i, 0));
-            cornerPoints.add(new Point(i, HEIGHT));
+        for (int i = XSTART; i < XSTART + WIDTH; i++) {
+            cornerPoints.add(new Point(i, YSTART));
+            cornerPoints.add(new Point(i, YSTART + HEIGHT));
         }
 
-        for (int j = 0; j < HEIGHT; j++) {
-            cornerPoints.add(new Point(0, j));
-            cornerPoints.add(new Point(WIDTH, j));
+        for (int j = YSTART; j < YSTART + HEIGHT; j++) {
+            cornerPoints.add(new Point(XSTART, j));
+            cornerPoints.add(new Point(XSTART + WIDTH, j));
         }
     }
 
     public static void backGroundOneColor (Terminal terminal) {
-        for (int i = 0; i < WIDTH; i++) {
-            for (int j = 0; j < HEIGHT; j++) {
+        for (int i = XSTART; i < XSTART + WIDTH; i++) {
+            for (int j = YSTART; j < YSTART + HEIGHT; j++) {
                 terminal.moveCursor(i, j);
             terminal.putCharacter(' ');
             terminal.applyBackgroundColor(150, 110, 40);

@@ -14,7 +14,7 @@ public class Snake implements Draw {
     public Snake() {
         this.direction = Direction.RIGHT;
         for (int i = 0; i < 5; i++) {
-            points.add(new Point(Main.WIDTH/2 + i, Main.HEIGHT/2));
+            points.add(new Point(Main.XSTART + Main.WIDTH/2 + i, Main.YSTART + Main.HEIGHT/2));
         }
     }
 

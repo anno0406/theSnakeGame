@@ -17,8 +17,6 @@ public class Main {
     public static final int WIDTH = 75;
     public static final int HEIGHT = 25;
     static List<Point> cornerPoints = new ArrayList<>();
-    private static int rowCounter = 0;
-    private static int colCounter = 0;
 
     public static void main(String[] args) throws InterruptedException {
         Terminal terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF16"));
@@ -89,7 +87,7 @@ public class Main {
         "   | |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) | |",
         "   | | |_ | / /\\ \\ | |\\/| |  __|   | |  | |\\ \\/ / |  __| |  _  /| |",
         "   | |__| |/ ____ \\| |  | | |____  | |__| | \\  /  | |____| | \\ \\|_|",
-        "    \\_____/_/    \\_\\_|  |_|______|  \\_____/   \\/   |______|_|  \\_(_)",
+        "    \\_____/_/    \\_\\_|  |_|______|  \\____/   \\/   |______|_|  \\_(_)",
         "  __________________________________________________________________",
         "|____________________________________________________________________|",
         };

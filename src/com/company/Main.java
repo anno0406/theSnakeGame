@@ -3,6 +3,7 @@ package com.company;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.Terminal;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
@@ -12,7 +13,7 @@ import java.util.Scanner;
 
 public class Main {
 
-    public static final int XSTART = 5;
+    public static final int XSTART = 8;
     public static final int YSTART = 2;
     public static final int WIDTH = 75;
     public static final int HEIGHT = 25;
@@ -27,13 +28,16 @@ public class Main {
         Key key;
 
         backGroundOneColor(terminal);
-        snake.draw(terminal);
+        startPage(terminal);
+
         backGround(terminal);
 
         do {
             Thread.sleep(1);
             key = terminal.readInput();
         } while (key == null);
+        terminal.clearScreen();
+        backGroundOneColor(terminal);
         while (snake.isAlive()) {
             key = terminal.readInput();
 //            terminal.clearScreen();
@@ -43,6 +47,18 @@ public class Main {
             Thread.sleep(100);
         }
         gameOver(terminal);
+        System.out.println(snake.scoreCounter);
+    }
+
+    public static void startPage (Terminal terminal){
+        String start = "+++++++SNAKE+++++++";
+        for (int i = 0; i < start.length(); i++) {
+            terminal.moveCursor(XSTART+(WIDTH/2)-(start.length()/2)+i, 10);
+            terminal.putCharacter(start.charAt(i));
+            terminal.setCursorVisible(false);
+        }
+
+
     }
 
     public static void gameOver(Terminal terminal) {
@@ -50,7 +66,7 @@ public class Main {
         printGameOverText(terminal);
     }
 
-    public static void backGround(Terminal terminal){
+    public static void backGround(Terminal terminal) {
         for (int i = XSTART; i < XSTART + WIDTH; i++) {
             cornerPoints.add(new Point(i, YSTART));
             cornerPoints.add(new Point(i, YSTART + HEIGHT));
@@ -62,15 +78,15 @@ public class Main {
         }
     }
 
-    public static void backGroundOneColor (Terminal terminal) {
+    public static void backGroundOneColor(Terminal terminal) {
+        terminal.applyBackgroundColor(150, 110, 40);
         for (int i = XSTART; i < XSTART + WIDTH; i++) {
             for (int j = YSTART; j < YSTART + HEIGHT; j++) {
                 terminal.moveCursor(i, j);
-            terminal.putCharacter(' ');
-            terminal.applyBackgroundColor(150, 110, 40);
-            terminal.setCursorVisible(false);
+                terminal.putCharacter(' ');
             }
         }
+        terminal.setCursorVisible(false);
     }
 
     private static void printGameOverText(Terminal terminal) {
@@ -82,25 +98,24 @@ public class Main {
             rowCounter++;
         }*/
         String[] name = {
-        "      _____         __  __  ______   ______      ________ _____  _ ",
-        "    / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\| |",
-        "   | |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) | |",
-        "   | | |_ | / /\\ \\ | |\\/| |  __|   | |  | |\\ \\/ / |  __| |  _  /| |",
-        "   | |__| |/ ____ \\| |  | | |____  | |__| | \\  /  | |____| | \\ \\|_|",
-        "    \\_____/_/    \\_\\_|  |_|______|  \\____/   \\/   |______|_|  \\_(_)",
-        "  __________________________________________________________________",
-        "|____________________________________________________________________|",
+                "      _____         __  __  ______   ______      ________ _____  _ ",
+                "    / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\| |",
+                "   | |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) | |",
+                "   | | |_ | / /\\ \\ | |\\/| |  __|   | |  | |\\ \\/ / |  __| |  _  /| |",
+                "   | |__| |/ ____ \\| |  | | |____  | |__| | \\  /  | |____| | \\ \\|_|",
+                "    \\_____/_/    \\_\\_|  |_|______|  \\____/   \\/   |______|_|  \\_(_)",
+                "  __________________________________________________________________",
+                "|____________________________________________________________________|",
         };
 
-        for (int row=0; row<name.length; row++) {
+        for (int row = 0; row < name.length; row++) {
             for (int col = 0; col < name[row].length(); col++) {
-                terminal.moveCursor(col+10, row+10);
+                terminal.moveCursor(col + 10, row + 10);
                 terminal.applyBackgroundColor(Terminal.Color.BLACK);
                 terminal.applyForegroundColor(Terminal.Color.CYAN);
                 terminal.putCharacter(name[row].charAt(col));
                 terminal.setCursorVisible(false);
             }
         }
-        
     }
 }

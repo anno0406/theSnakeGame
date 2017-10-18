@@ -10,6 +10,7 @@ public class Snake implements Draw {
 
     List<Point> points = new ArrayList<>();
     Direction direction;
+    int scoreCounter = 0;
 
     public Snake() {
         this.direction = Direction.RIGHT;
@@ -50,39 +51,48 @@ public class Snake implements Draw {
         }
         else {
             pear.put();
+            scoreCounter += 1000;
         }
 
         if (key == null){
             moveNoKeyPressed(posXForLastElem, posYForLastElem);
         }
         else {
-            switch (key.getKind()) {
+            Key.Kind kbd = key.getKind();
+            if (direction == Direction.UP || direction == Direction.DOWN){
+                switch (kbd) {
+                    case ArrowLeft:
+                        moveLeft(posXForLastElem, posYForLastElem);
+                        direction = Direction.LEFT;
+                        break;
 
-                case ArrowUp:
-                    moveUp(posXForLastElem, posYForLastElem);
-                    direction = Direction.UP;
-                    break;
+                    case ArrowRight:
+                        moveRight(posXForLastElem, posYForLastElem);
+                        direction = Direction.RIGHT;
+                        break;
 
-                case ArrowDown:
-                    moveDown(posXForLastElem, posYForLastElem);
-                    direction = Direction.DOWN;
-                    break;
+                    default:
+                        moveNoKeyPressed(posXForLastElem, posYForLastElem);
+                        break;
+                }
+            }
+            else {
+                switch (kbd) {
+                    case ArrowUp:
+                        moveUp(posXForLastElem, posYForLastElem);
+                        direction = Direction.UP;
+                        break;
 
-                case ArrowLeft:
-                    moveLeft(posXForLastElem, posYForLastElem);
-                    direction = Direction.LEFT;
-                    break;
-
-                case ArrowRight:
-                    moveRight(posXForLastElem, posYForLastElem);
-                    direction = Direction.RIGHT;
-                    break;
-
-                default:
-                    break;
+                    case ArrowDown:
+                        moveDown(posXForLastElem, posYForLastElem);
+                        direction = Direction.DOWN;
+                        break;
+                    default:
+                        moveNoKeyPressed(posXForLastElem, posYForLastElem);
+                        break;
+                }
             }
         }
-
     }
 
     private void moveNoKeyPressed(int posX, int posY) {

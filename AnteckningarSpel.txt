@@ -10,11 +10,18 @@ Ormen går snabbare och snabbare eller i början kan du välja lätt, medel elle
 Tidsbegränsning på äpplena. De byter plats eller några sekunder. 
 
 
-
 DEBUGGING ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
-1- flytta rutan till mitten
-2- ska inte kunna byta håll
-3- 
+
+1- ska inte kunna byta håll
+2- score
+3- startruta
+4- highscore ev. i fil
+5- hastighet
+6- lätt-medel-svår
+7- tidsbegränsning på pear
+8- powerups
+
+
 
 1. Rita ut ormen på skärmen. Startlängd: 5 tecken. 
 2. Få den att röra sig framåt.

@@ -13,13 +13,14 @@ Tidsbegränsning på äpplena. De byter plats eller några sekunder.
 DEBUGGING ¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤¤
 
 1- ska inte kunna byta håll
-2- score
 3- startruta
-4- highscore ev. i fil
+2- score
 5- hastighet
-6- lätt-medel-svår
-7- tidsbegränsning på pear
+4- highscore ev. i fil
 8- powerups
+x- coolare startruta
+7- tidsbegränsning på pear
+6- lätt-medel-svår
 
 
 

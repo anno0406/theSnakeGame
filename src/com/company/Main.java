@@ -40,17 +40,16 @@ public class Main {
         backGroundOneColor(terminal);
         while (snake.isAlive()) {
             key = terminal.readInput();
-//            terminal.clearScreen();
             snake.move(key, pear, terminal);
+            printScore(terminal, snake.scoreCounter);
             snake.draw(terminal);
             pear.draw(terminal);
             Thread.sleep(100);
         }
         gameOver(terminal);
-        System.out.println(snake.scoreCounter);
     }
 
-    public static void startPage (Terminal terminal){
+    public static void startPage(Terminal terminal) {
         String start = "+++++++SNAKE+++++++";
         for (int i = 0; i < start.length(); i++) {
             terminal.moveCursor(XSTART+(WIDTH/2)-(start.length()/2)+i, 10);
@@ -58,7 +57,16 @@ public class Main {
             terminal.setCursorVisible(false);
         }
 
+    }
 
+    public static void printScore(Terminal terminal, int score) {
+        String s = "SCORE " + score;
+        terminal.applyBackgroundColor(Terminal.Color.BLACK);
+        for (int i = s.length()-1; i >=0; i--) {
+            terminal.moveCursor(XSTART + WIDTH -(s.length()-i), YSTART-1);
+            terminal.putCharacter(s.charAt(i));
+        }
+        terminal.applyBackgroundColor(150, 110, 40);
     }
 
     public static void gameOver(Terminal terminal) {

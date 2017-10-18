@@ -3,16 +3,20 @@ package com.company;
 import com.googlecode.lanterna.TerminalFacade;
 import com.googlecode.lanterna.input.Key;
 import com.googlecode.lanterna.terminal.Terminal;
-
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static final int WIDTH = 75;
     public static final int HEIGHT = 25;
     static List<Point> cornerPoints = new ArrayList<>();
+    private static int rowCounter = 0;
+    private static int colCounter = 0;
 
     public static void main(String[] args) throws InterruptedException {
         Terminal terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF16"));
@@ -41,9 +45,9 @@ public class Main {
         gameOver(terminal);
     }
 
-    public static void gameOver(Terminal terminal){
-        System.out.println("God jul!");
-        //System.exit(0);
+    public static void gameOver(Terminal terminal) {
+        terminal.clearScreen();
+        printGameOverText(terminal);
     }
 
     public static void backGround(Terminal terminal){
@@ -67,5 +71,36 @@ public class Main {
             terminal.setCursorVisible(false);
             }
         }
+    }
+
+    private static void printGameOverText(Terminal terminal) {
+        /*String path = "/Users/aramiB/Desktop/Academy/The Snake/gameover.txt";
+        String string = "";
+        Scanner sc = new Scanner(new File(path));
+        while (sc.hasNextLine()){
+            string += sc.nextLine();
+            rowCounter++;
+        }*/
+        String[] name = {
+        "      _____         __  __  ______   ______      ________ _____  _ ",
+        "    / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\| |",
+        "   | |  __   /  \\  | \\  / | |__    | |  | \\ \\  / /| |__  | |__) | |",
+        "   | | |_ | / /\\ \\ | |\\/| |  __|   | |  | |\\ \\/ / |  __| |  _  /| |",
+        "   | |__| |/ ____ \\| |  | | |____  | |__| | \\  /  | |____| | \\ \\|_|",
+        "    \\_____/_/    \\_\\_|  |_|______|  \\_____/   \\/   |______|_|  \\_(_)",
+        "  __________________________________________________________________",
+        "|____________________________________________________________________|",
+        };
+
+        for (int row=0; row<name.length; row++) {
+            for (int col = 0; col < name[row].length(); col++) {
+                terminal.moveCursor(col+10, row+10);
+                terminal.applyBackgroundColor(Terminal.Color.BLACK);
+                terminal.applyForegroundColor(Terminal.Color.CYAN);
+                terminal.putCharacter(name[row].charAt(col));
+                terminal.setCursorVisible(false);
+            }
+        }
+        
     }
 }

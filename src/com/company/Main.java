@@ -8,6 +8,8 @@ import java.io.*;
 import java.nio.charset.Charset;
 import java.util.*;
 
+import static com.googlecode.lanterna.input.Key.Kind.Enter;
+
 public class Main {
 
     public static final int XSTART = 8;
@@ -16,6 +18,7 @@ public class Main {
     public static final int HEIGHT = 25;
     public static int speed = 100;
     static List<Point> cornerPoints = new ArrayList<>();
+    static String userName = "";
 
     public static void main(String[] args) throws InterruptedException, IOException {
         Terminal terminal = TerminalFacade.createTerminal(System.in, System.out, Charset.forName("UTF16"));
@@ -53,11 +56,18 @@ public class Main {
     public static void startPage(Terminal terminal) throws FileNotFoundException {
         String start = "+++++++SNAKE+++++++";
         String topFiveScores = "TOP 5 SCORES:";
-        List<String> topFive = fiveHighestScores();
+        List<Score> topFive = fiveHighestScores();
         for (int i = 0; i < topFive.size(); i++) {
-            for (int j = 0; j < topFive.get(i).length(); j++) {
-                terminal.moveCursor(XSTART+(WIDTH/2)-(topFive.get(i).length()/2)+j, 12+i);
-                terminal.putCharacter(topFive.get(i).charAt(j));
+            int j = 0;
+            for (; j < topFive.get(i).userName.length(); j++) {
+                terminal.moveCursor(XSTART+(WIDTH/2)-(topFive.get(i).userName.length()/2)+j-4, 12+i);
+                terminal.putCharacter(topFive.get(i).userName.charAt(j));
+                terminal.setCursorVisible(false);
+            }
+            String scoreStr = topFive.get(i).score + "";
+            for (int k = j; k < j + scoreStr.length(); k++) {
+                terminal.moveCursor(XSTART+(WIDTH/2)-(scoreStr.length()/2)+k + j-4, 12+i);
+                terminal.putCharacter(scoreStr.charAt(k-j));
                 terminal.setCursorVisible(false);
             }
         }
@@ -72,6 +82,32 @@ public class Main {
             terminal.putCharacter(topFiveScores.charAt(i));
             terminal.setCursorVisible(false);
         }
+
+        String enterName = "ENTER YOUR USERNAME:";
+        for (int i = 0; i < enterName.length(); i++) {
+            terminal.moveCursor(XSTART+(WIDTH/2)-(enterName.length()/2)+i, 19);
+            terminal.putCharacter(enterName.charAt(i));
+            terminal.setCursorVisible(false);
+        }
+
+        Key key;
+        int col = XSTART+(WIDTH/2)-(enterName.length()/2);
+        while (true) {
+            do {
+                key = terminal.readInput();
+            } while (key == null);
+
+            if (key.getKind() == Enter){
+                break;
+            }
+            else {
+                char c = Character.toUpperCase(key.getCharacter());
+                userName += c;
+                terminal.moveCursor(col++, 20);
+                terminal.putCharacter(c);
+            }
+        }
+        System.out.println(userName);
     }
 
     public static void printScore(Terminal terminal, int score) {
@@ -168,7 +204,7 @@ public class Main {
 
 
         PrintWriter outStream = new PrintWriter(new BufferedWriter(new FileWriter("highScore.txt", true)));
-        outStream.println(score);
+        outStream.println(userName + " " + score);
         outStream.close();
 
 
@@ -183,19 +219,21 @@ public class Main {
                 high = nextScore;
             }
         }
-        return (high < score);
+        return (score > high);
     }
 
     private static List fiveHighestScores() throws FileNotFoundException {
-        List<Integer> arrayList = new ArrayList<>();
-        List<String> arrayListTopFive = new ArrayList<>();
+        List<Score> arrayList = new ArrayList<>();
+        List<Score> arrayListTopFive = new ArrayList<>();
         Scanner scan = new Scanner(new File("highScore.txt"));
-        while (scan.hasNextInt()){
-            arrayList.add(scan.nextInt());
+        while (scan.hasNext()){
+            String name = scan.next();
+            int score = scan.nextInt();
+            arrayList.add(new Score(name, score));
         }
-        Collections.sort(arrayList);
+        Collections.sort(arrayList, new ScoreComparator());
         for (int i = arrayList.size()-1; i >arrayList.size()-6; i--) {
-            arrayListTopFive.add(arrayList.get(i).toString());
+            arrayListTopFive.add(arrayList.get(i));
         }
         return arrayListTopFive;
     }

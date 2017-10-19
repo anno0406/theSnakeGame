@@ -213,7 +213,8 @@ public class Main {
     private static boolean checkHighScore(int score) throws FileNotFoundException {
         Scanner scan = new Scanner(new File("highScore.txt"));
         int high = 0;
-        while (scan.hasNextInt()){
+        while (scan.hasNext()){
+            String s = scan.next();
             int nextScore = scan.nextInt();
             if (nextScore > high) {
                 high = nextScore;

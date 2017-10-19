@@ -51,7 +51,8 @@ public class Main {
     }
 
     public static void startPage(Terminal terminal) throws FileNotFoundException {
-        String[] startName = {"███████╗███╗   ██╗███████╗██╗██╗  ██╗",
+        String[] startName = {
+                "███████╗███╗   ██╗███████╗██╗██╗  ██╗",
                 "██╔════╝████╗  ██║██╔════╝██║██║ ██╔╝",
                 "███████╗██╔██╗ ██║█████╗  ██║█████╔╝",
                 "╚════██║██║╚██╗██║██╔══╝  ██║██╔═██╗",
@@ -60,7 +61,7 @@ public class Main {
 
         for (int row = 0; row < startName.length; row++) {
             for (int col = 0; col < startName[row].length(); col++) {
-                terminal.moveCursor(XSTART+(WIDTH/2)-(startName[row].length()/2)+col, row+2);
+                terminal.moveCursor(XSTART+(WIDTH/2)-(startName[row].length()/2)+col, row+4);
                 terminal.applyForegroundColor(Terminal.Color.WHITE);
                 terminal.putCharacter(startName[row].charAt(col));
                 terminal.setCursorVisible(false);
@@ -166,13 +167,6 @@ public class Main {
     }
 
     private static void printGameOverText(Terminal terminal, int score) throws IOException {
-        /*String path = "/Users/aramiB/Desktop/Academy/The Snake/gameover.txt";
-        String string = "";
-        Scanner sc = new Scanner(new File(path));
-        while (sc.hasNextLine()){
-            string += sc.nextLine();
-            rowCounter++;
-        }*/
         String[] name = {
                 "      _____         __  __  ______   ______      ________ _____  _ ",
                 "    / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\| |",
@@ -185,7 +179,7 @@ public class Main {
                 "                                                                      ",
                 "                              SCORE: " + score
         };
-
+        
         String [] name2 = {
                 "      _____         __  __  ______   ______      ________ _____  _ ",
                 "    / ____|   /\\   |  \\/  |  ____|  / __ \\ \\    / /  ____|  __ \\| |",
@@ -207,7 +201,7 @@ public class Main {
 
         for (int row = 0; row < chooseName.length; row++) {
             for (int col = 0; col < chooseName[row].length(); col++) {
-                terminal.moveCursor(col + 10, row + 10);
+                terminal.moveCursor(col + 15, row + 10);
                 terminal.applyBackgroundColor(Terminal.Color.BLACK);
                 terminal.applyForegroundColor(150, 110, 40);
                 terminal.putCharacter(chooseName[row].charAt(col));

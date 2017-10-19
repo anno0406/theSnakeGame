@@ -9,10 +9,11 @@ import java.nio.charset.Charset;
 import java.util.*;
 
 import static com.googlecode.lanterna.input.Key.Kind.Enter;
+import static com.googlecode.lanterna.input.Key.Kind.Escape;
 
 public class Main {
 
-    public static final int XSTART = 8;
+    public static final int XSTART = 12;
     public static final int YSTART = 2;
     public static final int WIDTH = 75;
     public static final int HEIGHT = 25;
@@ -50,28 +51,36 @@ public class Main {
     }
 
     public static void startPage(Terminal terminal) throws FileNotFoundException {
-        String start = "+++++++SNAKE+++++++";
+        String[] startName = {"███████╗███╗   ██╗███████╗██╗██╗  ██╗",
+                "██╔════╝████╗  ██║██╔════╝██║██║ ██╔╝",
+                "███████╗██╔██╗ ██║█████╗  ██║█████╔╝",
+                "╚════██║██║╚██╗██║██╔══╝  ██║██╔═██╗",
+                "███████║██║ ╚████║███████╗██║██║  ██╗",
+                "╚══════╝╚═╝  ╚═══╝╚══════╝╚═╝╚═╝  ╚═╝"};
+
+        for (int row = 0; row < startName.length; row++) {
+            for (int col = 0; col < startName[row].length(); col++) {
+                terminal.moveCursor(XSTART+(WIDTH/2)-(startName[row].length()/2)+col, row+2);
+                terminal.applyForegroundColor(Terminal.Color.WHITE);
+                terminal.putCharacter(startName[row].charAt(col));
+                terminal.setCursorVisible(false);
+            }
+        }
+
         String topFiveScores = "TOP 5 SCORES:";
-        List<Score> topFive = fiveHighestScores();
+        List<String> topFive = fiveHighestScores();
         for (int i = 0; i < topFive.size(); i++) {
-            int j = 0;
-            for (; j < topFive.get(i).userName.length(); j++) {
-                terminal.moveCursor(XSTART+(WIDTH/2)-(topFive.get(i).userName.length()/2)+j-4, 12+i);
-                terminal.putCharacter(topFive.get(i).userName.charAt(j));
-                terminal.setCursorVisible(false);
-            }
-            String scoreStr = topFive.get(i).score + "";
-            for (int k = j; k < j + scoreStr.length(); k++) {
-                terminal.moveCursor(XSTART+(WIDTH/2)-(scoreStr.length()/2)+k + j-4, 12+i);
-                terminal.putCharacter(scoreStr.charAt(k-j));
+            for (int j = 0; j < topFive.get(i).length(); j++) {
+                terminal.moveCursor(XSTART+(WIDTH/2)-(topFive.get(i).length()/2)+j, 12+i);
+                terminal.putCharacter(topFive.get(i).charAt(j));
                 terminal.setCursorVisible(false);
             }
         }
-        for (int i = 0; i < start.length(); i++) {
-            terminal.moveCursor(XSTART+(WIDTH/2)-(start.length()/2)+i, 8);
-            terminal.putCharacter(start.charAt(i));
-            terminal.setCursorVisible(false);
-        }
+//        for (int i = 0; i < start.length(); i++) {
+//            terminal.moveCursor(XSTART+(WIDTH/2)-(start.length()/2)+i, 8);
+//            terminal.putCharacter(start.charAt(i));
+//            terminal.setCursorVisible(false);
+//        }
 
         for (int i = 0; i < topFiveScores.length(); i++) {
             terminal.moveCursor(XSTART+(WIDTH/2)-(topFiveScores.length()/2)+i, 11);
@@ -122,6 +131,15 @@ public class Main {
     public static void gameOver(Terminal terminal, int score) throws IOException {
         terminal.clearScreen();
         printGameOverText(terminal, score);
+        Key key;
+        while (true){
+            do {
+                key = terminal.readInput();
+            }while(key == null);
+            if(key.getKind() == Escape){
+                System.exit(0);
+            }
+        }
     }
 
     public static void gameArea(Terminal terminal) {
@@ -191,7 +209,7 @@ public class Main {
             for (int col = 0; col < chooseName[row].length(); col++) {
                 terminal.moveCursor(col + 10, row + 10);
                 terminal.applyBackgroundColor(Terminal.Color.BLACK);
-                terminal.applyForegroundColor(Terminal.Color.CYAN);
+                terminal.applyForegroundColor(150, 110, 40);
                 terminal.putCharacter(chooseName[row].charAt(col));
                 terminal.setCursorVisible(false);
             }
@@ -220,7 +238,7 @@ public class Main {
 
     private static List fiveHighestScores() throws FileNotFoundException {
         List<Score> arrayList = new ArrayList<>();
-        List<Score> arrayListTopFive = new ArrayList<>();
+        List<String> arrayListTopFive = new ArrayList<>();
         Scanner scan = new Scanner(new File("highScore.txt"));
         while (scan.hasNext()){
             String name = scan.next();
@@ -229,7 +247,7 @@ public class Main {
         }
         Collections.sort(arrayList, new ScoreComparator());
         for (int i = arrayList.size()-1; i >arrayList.size()-6; i--) {
-            arrayListTopFive.add(arrayList.get(i));
+            arrayListTopFive.add(arrayList.get(i).userName + " " + arrayList.get(i).score);
         }
         return arrayListTopFive;
     }

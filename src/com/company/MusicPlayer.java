@@ -1,17 +1,13 @@
 package com.company;
 
-
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.util.Duration;
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
-
 import java.io.*;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+
 
 public class MusicPlayer
 {

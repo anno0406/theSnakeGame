@@ -116,12 +116,12 @@ public class Snake implements Draw {
         switch (direction) {
             case UP:
                 moveUp(posX, posY);
-                Thread.sleep(40);
+                Thread.sleep(10);
                 break;
 
             case DOWN:
                 moveDown(posX, posY);
-                Thread.sleep(40);
+                Thread.sleep(10);
                 break;
 
             case LEFT:

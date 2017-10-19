@@ -36,7 +36,7 @@ public class Main {
         } while (key == null);
         terminal.clearScreen();
         backGroundOneColor(terminal);
-        musicPlayer.play("/Users/aramiB/Downloads/Snake Game (online-audio-converter.com).mp3", true);
+        musicPlayer.play("Snake Game (online-audio-converter.com).mp3", true);
         while (snake.isAlive()) {
             key = terminal.readInput();
             snake.move(key, pear, terminal, superPear);
@@ -47,7 +47,7 @@ public class Main {
             Thread.sleep(speed);
         }
         gameOver(terminal, snake.scoreCounter);
-        musicPlayer.stop("/Users/aramiB/Downloads/Snake Game (online-audio-converter.com).mp3");
+        musicPlayer.stop("Snake Game (online-audio-converter.com).mp3");
     }
 
     public static void startPage(Terminal terminal) throws FileNotFoundException {

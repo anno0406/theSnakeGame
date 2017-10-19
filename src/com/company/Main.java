@@ -33,10 +33,6 @@ public class Main {
         startPage(terminal);
         gameArea(terminal);
 
-        do {
-            Thread.sleep(1);
-            key = terminal.readInput();
-        } while (key == null);
         terminal.clearScreen();
         backGroundOneColor(terminal);
         musicPlayer.play("Snake Game (online-audio-converter.com).mp3", true);
@@ -107,7 +103,6 @@ public class Main {
                 terminal.putCharacter(c);
             }
         }
-        System.out.println(userName);
     }
 
     public static void printScore(Terminal terminal, int score) {

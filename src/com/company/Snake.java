@@ -25,9 +25,10 @@ public class Snake implements Draw {
 
     @Override
     public void draw(Terminal terminal) {
+        terminal.applyForegroundColor(Terminal.Color.WHITE);
         for (Point point : points) {
             terminal.moveCursor(point.x, point.y);
-            terminal.putCharacter('O');
+            terminal.putCharacter('\u2b24');
             terminal.setCursorVisible(false);
         }
     }

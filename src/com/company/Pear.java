@@ -31,9 +31,11 @@ public class Pear implements Draw {
 
     @Override
     public void draw(Terminal terminal) {
-        char pear = "\u1F40D".toCharArray()[0];
+        char pear = "\u2587".toCharArray()[0];
+        terminal.applyForegroundColor(191, 57,45);
         terminal.moveCursor(p.x, p.y);
         terminal.putCharacter(pear);
         terminal.setCursorVisible(false);
+        terminal.applyForegroundColor(Terminal.Color.WHITE);
     }
 }

@@ -43,7 +43,7 @@ public class SuperPear implements Draw {
     @Override
     public void draw(Terminal terminal) {
         if (!(p.x == 200 && p.y ==200)) {
-            char pear = "S".toCharArray()[0];
+            char pear = "\u2588".toCharArray()[0];
             terminal.moveCursor(p.x, p.y);
             terminal.putCharacter(pear);
             terminal.setCursorVisible(false);
